@@ -23,8 +23,11 @@
         <fieldset class="form__fieldset">
             <legend class="form__legend">Kalkulator wymiany walut</legend>
             <p class="form__paragraph">
-                <label for="from" class="form__label">Kwota wpłacona:</label>
-                <input type="number" id="from" name="from" class="form__input js-fromValue" min="0" step="any" pattern="[0-9]+([,\.][0-9]+)?">
+                <label for="from">Kwota wpłacona:</label>
+            </p>
+            <p class="form__paragraph form__paragraph--increased">
+                <input type="number" id="from" name="from" class="form__input js-fromValue" min="0" step="any"
+                    pattern="[0-9]+([,\.][0-9]+)?">
                 <select name="from_currency" class="form__select js-fromCurrency">
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
@@ -32,8 +35,11 @@
                 </select>
             </p>
             <p class="form__paragraph">
-                <label for="to" class="form__label">Kwota do otrzymania:</label>
-                <input type="number" id="to" name="to" class="form__input js-toValue" min="0" step="any" pattern="[0-9]+([,\.][0-9]+)?">
+                <label for="to">Kwota do otrzymania:</label>
+            </p>
+            <p class="form__paragraph form__paragraph--increased">
+                <input type="number" id="to" name="to" class="form__input js-toValue" min="0" step="any"
+                    pattern="[0-9]+([,\.][0-9]+)?">
                 <select name="to_currency" class="form__select js-toCurrency">
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
@@ -41,7 +47,9 @@
                 </select>
             </p>
             <p class="form__paragraph">
-                <label for="rate" class="form__label">Kurs:</label>
+                <label for="rate">Kurs:</label>
+            </p>
+            <p class="form__paragraph form__paragraph--increased">
                 <input type="text" inputmode="numeric" id="rate" name="exchange_rate"
                     class="form__input form__input--rate js-rate" readonly>
             </p>
