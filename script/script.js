@@ -1,71 +1,91 @@
-let rateValue = document.querySelector(".js-rate");
-let fromValue = document.querySelector(".js-fromValue");
-let fromCurrency = document.querySelector(".js-fromCurrency");
-let toValue = document.querySelector(".js-toValue");
-let toCurrency = document.querySelector(".js-toCurrency");
-let buttonElement = document.querySelector(".js-button");
-let form = document.querySelector(".js-form");
-let plnRate = 1;
-let eurRate = 4.54;
-let usdRate = 4.00;
+{
+    const rateValue = document.querySelector(".js-rate");
+    const fromValue = document.querySelector(".js-fromValue");
+    const toValue = document.querySelector(".js-toValue");
+    const fromCurrency = document.querySelector(".js-fromCurrency");
+    const toCurrency = document.querySelector(".js-toCurrency");
+    const plnRate = 1;
+    const eurRate = 4.54;
+    const usdRate = 4.00;
 
-fromCurrency.value = "EUR";
-toCurrency.value = "PLN";
+    fromCurrency.value = "EUR";
+    toCurrency.value = "PLN";
+    rateValue.value = eurRate;
 
-let firstCurrency = fromCurrency.value;
-let secondCurrency = toCurrency.value;
+    let firstCurrency = fromCurrency.value;
+    let secondCurrency = toCurrency.value;
 
-rateValue.value = eurRate;
+    const init = () => {
+        const form = document.querySelector(".js-form");
 
-[fromCurrency, toCurrency].forEach((element) => {
-    element.addEventListener("change", () => {
+        [fromCurrency, toCurrency].forEach((element) => {
+            element.addEventListener("change", onCurrencyChange);
+        });
 
+        fromValue.addEventListener("input", () => {
+            toValue.value = "";
+        });
+
+        toValue.addEventListener("input", () => {
+            fromValue.value = "";
+        });
+
+        form.addEventListener("submit", onFormSubmit);
+    };
+
+    const onCurrencyChange = () => {
+
+        sameCurrencyHandler();
+
+        defaultRate = calcDefaultRate();
+
+        rateValue.value = calcDefinitiveRate(defaultRate);
+    };
+
+    const sameCurrencyHandler = () => {
         if (fromCurrency.value === toCurrency.value && toCurrency.value === secondCurrency) {
             toCurrency.value = firstCurrency;
         }
         else if (fromCurrency.value === toCurrency.value && toCurrency.value === firstCurrency) {
             fromCurrency.value = secondCurrency;
-        }
+        };
 
-        switch (fromCurrency.value) {
-            case "EUR":
-                rateValue.value = eurRate;
-                break;
-            case "USD":
-                rateValue.value = usdRate;
-                break;
-            default:
-                rateValue.value = plnRate;
-        }
-
-        switch (toCurrency.value) {
-            case "EUR":
-                rateValue.value = (rateValue.value * (1 / eurRate)).toFixed(2);
-                break;
-            case "USD":
-                rateValue.value = (rateValue.value * (1 / usdRate)).toFixed(2);
-                break;
-            default:
-                rateValue.value = (rateValue.value * (1 / plnRate)).toFixed(2);
-        }
         firstCurrency = fromCurrency.value;
         secondCurrency = toCurrency.value;
-    });
-});
+    };
 
-fromValue.addEventListener("input", () => {
-    toValue.value = "";
-});
+    const calcDefaultRate = () => {
+        switch (fromCurrency.value) {
+            case "EUR":
+                return eurRate;
+            case "USD":
+                return usdRate;
+            default:
+                return plnRate;
+        };
+    };
 
-toValue.addEventListener("input", () => {
-    fromValue.value = "";
-});
+    const calcDefinitiveRate = (rate) => {
+        switch (toCurrency.value) {
+            case "EUR":
+                return (rate * (1 / eurRate)).toFixed(2);
+            case "USD":
+                return (rate * (1 / usdRate)).toFixed(2);
+            default:
+                return (rate * (1 / plnRate)).toFixed(2);
+        };
+    };
 
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    if (fromValue.value === "") {
-        fromValue.value = (toValue.value / rateValue.value).toFixed(2);
-    } else {
-        toValue.value = (fromValue.value * rateValue.value).toFixed(2);
-    }
-});
+    const onFormSubmit = (event) => {
+        event.preventDefault();
+        if (fromValue.value === "") {
+            fromValue.value = (toValue.value / rateValue.value).toFixed(2);
+        } else {
+            toValue.value = (fromValue.value * rateValue.value).toFixed(2);
+        };
+    };
+
+    init();
+
+
+}
