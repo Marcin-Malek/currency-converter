@@ -8,15 +8,15 @@
     const eurRate = 4.54;
     const usdRate = 4.00;
 
-    fromCurrency.value = "EUR";
-    toCurrency.value = "PLN";
-    rateValue.value = eurRate;
-
-    let firstCurrency = fromCurrency.value;
-    let secondCurrency = toCurrency.value;
+    let firstCurrency = "EUR";
+    let secondCurrency = "PLN";
 
     const init = () => {
         const form = document.querySelector(".js-form");
+
+        fromCurrency.value = "EUR";
+        toCurrency.value = "PLN";
+        rateValue.value = eurRate;
 
         [fromCurrency, toCurrency].forEach((element) => {
             element.addEventListener("change", onCurrencyChange);
