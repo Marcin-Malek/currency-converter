@@ -19,3 +19,6 @@ This page helps user calculate exchange values between three currencies:
 - EUR 
 - USD 
 
+Capabilities of this application are shortly presented in the animation below:
+
+![Animation](img/Animation.gif)
