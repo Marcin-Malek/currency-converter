@@ -11,28 +11,6 @@
     let firstCurrency = "EUR";
     let secondCurrency = "PLN";
 
-    const init = () => {
-        const form = document.querySelector(".js-form");
-
-        fromCurrency.value = "EUR";
-        toCurrency.value = "PLN";
-        rateValue.value = eurRate;
-
-        [fromCurrency, toCurrency].forEach((element) => {
-            element.addEventListener("change", onCurrencyChange);
-        });
-
-        fromValue.addEventListener("input", () => {
-            toValue.value = "";
-        });
-
-        toValue.addEventListener("input", () => {
-            fromValue.value = "";
-        });
-
-        form.addEventListener("submit", onFormSubmit);
-    };
-
     const onCurrencyChange = () => {
 
         sameCurrencyHandler();
@@ -85,7 +63,27 @@
         };
     };
 
+    const init = () => {
+        const form = document.querySelector(".js-form");
+
+        fromCurrency.value = "EUR";
+        toCurrency.value = "PLN";
+        rateValue.value = eurRate;
+
+        [fromCurrency, toCurrency].forEach((element) => {
+            element.addEventListener("change", onCurrencyChange);
+        });
+
+        fromValue.addEventListener("input", () => {
+            toValue.value = "";
+        });
+
+        toValue.addEventListener("input", () => {
+            fromValue.value = "";
+        });
+
+        form.addEventListener("submit", onFormSubmit);
+    };
+
     init();
-
-
 }
